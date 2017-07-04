@@ -3,19 +3,21 @@ def merge_compare(lista, listb):
     a = merge_compare(lista[:len(lista)/2], lista[len(lista)/2:]) if len(lista) > 1 else lista
     b = merge_compare(listb[:len(listb)/2], listb[len(listb)/2:]) if len(listb) > 1 else listb
     out = []
-    while len(a) or len(b):
-        if a and not b:
-            out += a
-            a = []
-        elif b and not a:
-            out += b
-            b = []
-        elif a[0] <= b[0]:
-            out.append(a[0])
-            del a[0]
-        elif b[0] < a[0]:
-            out.append(b[0])
-            del b[0]
+    pointera = 0
+    pointerb = 0
+    while pointera < len(a) or pointerb < len(b):
+        if pointera < len(a) and pointerb == len(b):
+            out += a[pointera:]
+            pointera = len(a)
+        elif pointerb < len(b) and pointera == len(a):
+            out += b[pointerb:]
+            pointerb = len(b)
+        elif a[pointera] <= b[pointerb]:
+            out.append(a[pointera])
+            pointera += 1
+        elif b[pointerb] < a[pointera]:
+            out.append(b[pointerb])
+            pointerb += 1
     return out
 
 def mergesort(collection):
