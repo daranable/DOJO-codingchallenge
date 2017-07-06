@@ -12,9 +12,7 @@ def partition(low, high, pivot, arr):
             high -= 1
         elif low != high and high > low:
             swap(low, high, arr)
-            print arr
-        # print low, high, pivot, ":",arr[low], arr[high], arr[pivot]
-        # else:
+
         if low == high or high < low:
             if arr[high] < arr[pivot]:
                 swap(high, pivot, arr)
@@ -32,13 +30,12 @@ def sort(low,high,arr):
     part = partition(low, high, pivot, arr)
     low -= 1
     if abs(low - (part-1)) > 1:
-        sort(low,part-1,arr)
+        sort(low,part,arr)
     if abs(high - (part+1)) > 1:
         sort(part+1,high,arr)
 
 
 def quicksort(arr):
-    print "start", arr
     sort(0,len(arr)-1,arr)
     return arr
 
